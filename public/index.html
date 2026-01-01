@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Builder - Tự động Build & Đóng gói Docker</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">🐳 Docker Builder</h1>
+            <div class="status" id="dockerStatus">
+                <span class="status-indicator"></span>
+                <span>Đang kiểm tra...</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Build Section -->
+        <section class="card">
+            <h2>📦 Build Docker Image</h2>
+            <form id="buildForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="dockerfile">Chọn Dockerfile:</label>
+                    <input type="file" id="dockerfile" name="dockerfile" accept=".dockerfile,Dockerfile,*" required>
+                    <small>Chọn file Dockerfile để build image</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="additionalFiles">Chọn thêm files (HTML, CSS, JS):</label>
+                    <input type="file" id="additionalFiles" name="additionalFiles" multiple>
+                    <small>⚠️ QUAN TRỌNG: Chọn TẤT CẢ files cần thiết (index.html, style.css, script.js, etc.)</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="imageName">Tên Image:</label>
+                        <input type="text" id="imageName" name="imageName" placeholder="my-app" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imageTag">Tag:</label>
+                        <input type="text" id="imageTag" name="imageTag" placeholder="latest" value="latest">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span>🔨 Build Image</span>
+                </button>
+            </form>
+
+            <div id="buildOutput" class="output hidden">
+                <h3>Build Output:</h3>
+                <pre id="buildLogs"></pre>
+            </div>
+        </section>
+
+        <!-- Images List -->
+        <section class="card">
+            <div class="card-header">
+                <h2>🖼️ Docker Images</h2>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-info" onclick="showImportModal()">
+                        📥 Import Image
+                    </button>
+                    <button class="btn btn-secondary" onclick="loadImages()">
+                        🔄 Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <div id="imagesList" class="list-container">
+                <p class="loading">Đang tải danh sách images...</p>
+            </div>
+        </section>
+
+        <!-- Containers List -->
+        <section class="card">
+            <div class="card-header">
+                <h2>📦 Docker Containers</h2>
+                <button class="btn btn-secondary" onclick="loadContainers()">
+                    🔄 Refresh
+                </button>
+            </div>
+            
+            <div id="containersList" class="list-container">
+                <p class="loading">Đang tải danh sách containers...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Export -->
+    <div id="exportModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>📥 Export Docker Image</h2>
+            <p>Bạn có muốn export image này thành file .tar không?</p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="confirmExport()">Export</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Hủy</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Import -->
+    <div id="importModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeImportModal()">&times;</span>
+            <h2>📥 Import Docker Image</h2>
+            <p>Chọn file .tar để load Docker image từ người khác</p>
+            <form id="importForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="importFile">Chọn file .tar:</label>
+                    <input type="file" id="importFile" name="importFile" accept=".tar" required>
+                    <small>Chọn file Docker image đã được export (.tar)</small>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="importImageName">Tên Image:</label>
+                        <input type="text" id="importImageName" name="importImageName" placeholder="my-imported-app" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="importImageTag">Tag:</label>
+                        <input type="text" id="importImageTag" name="importImageTag" placeholder="latest" value="latest">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">📥 Import</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeImportModal()">Hủy</button>
+                </div>
+            </form>
+            <div id="importProgress" class="hidden" style="margin-top: 15px;">
+                <p style="color: #667eea; font-weight: 600;">⏳ Đang import image...</p>
+                <div style="width: 100%; height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden;">
+                    <div id="importProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Đơn Giản</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MyWebsite</div>
+            <ul class="nav-links">
+                <li><a href="#home">Trang Chủ</a></li>
+                <li><a href="#about">Giới Thiệu</a></li>
+                <li><a href="#services">Dịch Vụ</a></li>
+                <li><a href="#contact">Liên Hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Chào Mừng Đến Với Website</h1>
+                <p>Một trang web đơn giản và đẹp mắt</p>
+                <button class="cta-button" onclick="showMessage()">Bắt Đầu</button>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Giới Thiệu</h2>
+                <p>Đây là một website đơn giản được xây dựng với HTML, CSS và JavaScript. Website có thiết kế hiện đại, responsive và dễ sử dụng.</p>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2>Dịch Vụ</h2>
+                <div class="service-grid">
+                    <div class="service-card">
+                        <div class="icon">🎨</div>
+                        <h3>Thiết Kế</h3>
+                        <p>Thiết kế giao diện đẹp mắt và chuyên nghiệp</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">💻</div>
+                        <h3>Phát Triển</h3>
+                        <p>Xây dựng website responsive và tối ưu</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🚀</div>
+                        <h3>Tối Ưu</h3>
+                        <p>Tối ưu hiệu suất và trải nghiệm người dùng</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Liên Hệ</h2>
+                <form id="contactForm">
+                    <input type="text" placeholder="Tên của bạn" required>
+                    <input type="email" placeholder="Email của bạn" required>
+                    <textarea placeholder="Tin nhắn của bạn" rows="5" required></textarea>
+                    <button type="submit">Gửi Tin Nhắn</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MyWebsite. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

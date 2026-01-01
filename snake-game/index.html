@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Trò Chơi Rắn Săn Mồi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐍 Snake Game</h1>
+            <p class="subtitle">Trò chơi rắn săn mồi cổ điển</p>
+        </header>
+
+        <div class="game-container">
+            <div class="game-info">
+                <div class="score-box">
+                    <span>Điểm: </span>
+                    <span id="score">0</span>
+                </div>
+                <div class="high-score-box">
+                    <span>Cao nhất: </span>
+                    <span id="highScore">0</span>
+                </div>
+            </div>
+
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+            <div class="controls">
+                <button id="startBtn" class="btn btn-primary">Bắt Đầu</button>
+                <button id="pauseBtn" class="btn btn-secondary" disabled>Tạm Dừng</button>
+                <button id="resetBtn" class="btn btn-danger">Chơi Lại</button>
+            </div>
+
+            <div class="instructions">
+                <h3>Hướng dẫn:</h3>
+                <ul>
+                    <li>🎮 Dùng phím mũi tên để điều khiển</li>
+                    <li>🍎 Ăn táo để tăng điểm</li>
+                    <li>⚠️ Không đâm vào tường hoặc thân mình</li>
+                    <li>🏆 Cố gắng đạt điểm cao nhất!</li>
+                </ul>
+            </div>
+
+            <div class="difficulty">
+                <h3>Độ khó:</h3>
+                <select id="difficulty" class="difficulty-select">
+                    <option value="easy">Dễ</option>
+                    <option value="medium" selected>Trung bình</option>
+                    <option value="hard">Khó</option>
+                </select>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Snake Game. Made with ❤️</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
